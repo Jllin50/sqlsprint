@@ -19,6 +19,18 @@ query = '''SELECT avg(HireDate - BirthDate) FROM Employees'''
 result = cursor.execute(query).fetchall()
 print(f'Average Age at Hire Date: \n {result[0][0]}\n')
 
+# Stretch - How does the average age of employee at hire vary by city?
+
+query = '''SELECT City, avg(HireDate - BirthDate)
+FROM Employees
+GROUP BY City'''
+result = cursor.execute(query).fetchall()
+print(f'Average age of employee at hire date by city:')
+for s in result:
+  print(f'{s[0]}: {s[1]}')
+print()
+  
+
 # - What are the ten most expensive items (per unit price) in the database *and* their suppliers
 
 query = '''SELECT ProductName, CompanyName FROM Products, Suppliers
@@ -36,3 +48,4 @@ ORDER BY COUNT(DISTINCT Products.ProductID) DESC
 LIMIT 1'''
 result = cursor.execute(query).fetchall()
 print(f'Largest product category: {result[0][0]}')
+
